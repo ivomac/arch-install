@@ -1,0 +1,4 @@
+advcpmv
+multi-git-status
+nnn-nerd
+zsh-theme-powerlevel10k-git
