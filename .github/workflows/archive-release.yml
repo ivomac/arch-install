@@ -1,0 +1,22 @@
+name: Create tarball of latest commit
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Tag
+        run: |
+          git tag -f latest
+          git push origin latest --force
