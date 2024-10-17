@@ -1,0 +1,4 @@
+kate
+konsole
+vim
+vim-runtime
