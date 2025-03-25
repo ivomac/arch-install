@@ -192,7 +192,6 @@ echo "Setting up user services"
 
 systemctl --user enable foot-server.service
 systemctl --user enable git-maintenance@weekly.timer
-systemctl --user enable psd.service
 systemctl --user enable profile-cleaner.service
 systemctl --user enable ssh-agent.service
 systemctl --user enable syncthing.service

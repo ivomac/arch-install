@@ -87,7 +87,6 @@ plasma-thunderbolt
 postgresql
 power-profiles-daemon
 profile-cleaner
-profile-sync-daemon
 pyright
 python-devtools
 python-dotenv
