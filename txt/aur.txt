@@ -3,3 +3,5 @@ kaggle-api
 multi-git-status
 nnn-nerd
 perl-latexml
+python-anthropic
+vim-language-server

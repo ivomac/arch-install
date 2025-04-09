@@ -1,4 +1,4 @@
-aichat
+adobe-source-sans-fonts
 android-tools
 archinstall
 ark
@@ -20,11 +20,11 @@ docker
 docker-compose
 dolphin
 earlyoom
+egl-wayland
 eza
 fd
-ffmepgthumbs
+ffmpegthumbs
 firefox
-flameshot
 foliate
 foot
 foot-terminfo
@@ -33,12 +33,15 @@ gitleaks
 fzf
 gist
 git
-gnuplot
+gitleaks
 gwenview
 hugin
 inetutils
+inkscape
+inter-font
 jedi-language-server
 jq
+julia
 jupyter-notebook
 jupyterlab
 kamera
@@ -72,6 +75,7 @@ nvme-cli
 okular
 otf-fira-mono
 otf-firamono-nerd
+otf-montserrat
 p7zip
 pandoc
 pass
@@ -81,6 +85,7 @@ pdfarranger
 plasma-browser-integration
 plasma-desktop
 plasma-disks
+plasma-meta
 plasma-sdk
 plasma-systemmonitor
 plasma-thunderbolt
@@ -88,7 +93,6 @@ postgresql
 power-profiles-daemon
 profile-cleaner
 pyright
-python-devtools
 python-dotenv
 python-ipywidgets
 python-openai
@@ -100,10 +104,14 @@ python-pipx
 python-pyarrow
 python-pyqt5
 python-pytables
+python-pytest-cov
 python-pyperclip
+python-scikit-learn
 python-sqlalchemy
 python-tabulate
 python-textual
+python-uncertainties
+python-uv
 qbittorrent
 rclone
 reflector
@@ -120,7 +128,10 @@ tailscale
 texlab
 texlive
 tree-sitter-cli
+ttf-fira-sans
+ttf-inconsolata
 ttf-nerd-fonts-symbols-mono
+ttf-ubuntu-font-family
 typescript-language-server
 udiskie
 unrar
@@ -130,6 +141,7 @@ visidata
 vlc
 vscode-html-languageserver
 vscode-json-languageserver
+wireless_tools
 wl-clipboard
 wofi
 xdg-desktop-portal-kde

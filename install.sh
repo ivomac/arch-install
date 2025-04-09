@@ -35,8 +35,6 @@ case $1 in
 	yay)
 		echo "Installing yay"
 		$HOME/.local/bin/yay-install
-		;;
-	aur)
 		echo "Installing AUR packages"
 		cat "$TXT_DIR/aur.txt" | yay -S --noconfirm --needed -
 		;;

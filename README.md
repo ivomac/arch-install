@@ -10,36 +10,19 @@ iwctl station wlan0 connect "$SSID"
 curl -L https://github.com/ivomac/arch-install/archive/refs/tags/latest.tar.gz | tar -xzv
 cd arch-install-latest
 ./install.sh nvme
-```
-
-Further nvme actions...
-
-```bash
 ./install.sh base
 ./install.sh relocate (user)
 arch-chroot /mnt/archinstall (or reboot)
 ./install.sh own (user)
-```
-
-```bash
 cd /home/(user)/arch-install
 ./install.sh uninstall
 ./install.sh pkgs
 ./install.sh root
+cp ?/ssh-keys/* ~/.ssh/
 su (user)
-```
-
-Add ssh keys...
-
-```bash
 ./install.sh user
 ./install.sh yay
-./install.sh aur
-```
-
-Restart...
-
-```bash
+reboot
 ./install.sh post-reboot
 ./install.sh manual
 ./install.sh todo
