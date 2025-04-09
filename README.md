@@ -12,7 +12,7 @@ cd arch-install-latest
 ./install.sh nvme
 ./install.sh base
 ./install.sh relocate (user)
-arch-chroot /mnt/archinstall (or reboot)
+arch-chroot /mnt/archinstall
 cd /home/(user)/arch-install
 ./install.sh own (user)
 ./install.sh uninstall
