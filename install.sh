@@ -23,6 +23,7 @@ case $1 in
 		cat "$TXT_DIR/uninstall.txt" | pacman -Rs --noconfirm -
 		;;
 	pkgs)
+		bash "$SCRIPTS_DIR/root-pacman.sh"
 		echo "Installing packages"
 		cat "$TXT_DIR/pacman.txt" | pacman -Syu --noconfirm --needed -
 		;;

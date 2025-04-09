@@ -23,15 +23,6 @@ Defaults targetpw
 ALL ALL=(ALL:ALL) ALL
 " > /etc/sudoers.d/40-targetpw
 
-## PACMAN
-
-echo "Setting up pacman"
-
-sed -i \
-	-e 's/#Color/Color/' \
-	-e 's/#ParallelDownloads.*/ParallelDownloads = 5/' \
-	/etc/pacman.conf
-
 ## ACTIVATE SysRq
 
 echo "Activating SysRq"
