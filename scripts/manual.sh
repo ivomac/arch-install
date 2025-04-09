@@ -69,8 +69,8 @@ user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 
 echo "Stowing CSS in firefox profile..."
 mkdir -p "$dir/chrome"
-stow --no-folding --target="$dir/chrome" --dir="$HOME/Projects/00-dotfiles" "firefox-css"
-echo "stow --restow --no-folding --target=\"$dir/chrome\" --dir=\"$HOME/Projects/00-dotfiles\" \"firefox-css\"" >> "$RESTOW"
+stow --no-folding --target="$dir/chrome" --dir="$HOME/Projects/00.00-dotfiles" "firefox-css"
+echo "stow --restow --no-folding --target=\"$dir/chrome\" --dir=\"$HOME/Projects/00.00-dotfiles\" \"firefox-css\"" >> "$RESTOW"
 
 firefox --new-tab localhost:8384 &> /dev/null & disown
 
