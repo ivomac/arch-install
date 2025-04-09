@@ -6,11 +6,6 @@ export CONFIG_DIR="$ROOT_DIR/config"
 export TXT_DIR="$ROOT_DIR/txt"
 
 case $1 in
-	noipv6)
-		sysctl -w net.ipv6.conf.all.disable_ipv6=1
-		sysctl -w net.ipv6.conf.default.disable_ipv6=1
-		sysctl -w net.ipv6.conf.lo.disable_ipv6=1
-		;;
 	nvme)
 		python "$SCRIPTS_DIR/nvme.py"
 		;;
@@ -33,9 +28,6 @@ case $1 in
 		;;
 	root)
 		bash "$SCRIPTS_DIR/root.sh"
-		;;
-	noipv6)
-		bash "$SCRIPTS_DIR/noipv6.sh"
 		;;
 	user)
 		bash "$SCRIPTS_DIR/user.sh"
