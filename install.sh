@@ -13,7 +13,7 @@ case $1 in
 		archinstall --config "$CONFIG_DIR/archinstall.json"
 		;;
 	relocate)
-		mv "$ROOT_DIR" "/mnt/archinstall/home/$2/arch-install"
+		mv "$ROOT_DIR" "/mnt/home/$2/arch-install"
 		;;
 	own)
 		chown -R "$2:$2" "/home/$2/arch-install"

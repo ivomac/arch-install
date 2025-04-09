@@ -13,8 +13,8 @@ cd arch-install-latest
 ./install.sh base
 ./install.sh relocate (user)
 arch-chroot /mnt/archinstall (or reboot)
-./install.sh own (user)
 cd /home/(user)/arch-install
+./install.sh own (user)
 ./install.sh uninstall
 ./install.sh pkgs
 ./install.sh root
