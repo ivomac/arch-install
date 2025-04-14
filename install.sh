@@ -33,11 +33,11 @@ case $1 in
 	user)
 		bash "$SCRIPTS_DIR/user.sh"
 		;;
-	yay)
-		echo "Installing yay"
-		$HOME/.local/bin/yay-install
+	paru)
+		echo "Installing paru"
+		$HOME/.local/bin/paru-install
 		echo "Installing AUR packages"
-		cat "$TXT_DIR/aur.txt" | yay -S --noconfirm --needed -
+		cat "$TXT_DIR/aur.txt" | paru -S --noconfirm --needed -
 		;;
 	post-reboot)
 		bash "$SCRIPTS_DIR/reboot.sh"

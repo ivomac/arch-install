@@ -21,7 +21,7 @@ cd /home/(user)/arch-install
 cp ?/ssh-keys/* ~/.ssh/
 su (user)
 ./install.sh user
-./install.sh yay
+./install.sh paru
 reboot
 ./install.sh post-reboot
 ./install.sh manual
