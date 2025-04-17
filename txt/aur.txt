@@ -1,5 +1,17 @@
 advcpmv
+albert
+ddcci-driver-linux-dkms-git
+emote
+lavalauncher-git
+lazydocker-bin
 multi-git-status
 nnn-nerd
+paru
 python-anthropic
+python-pynput
+qimgv-git
+selectdefaultapplication-git
 vim-language-server
+waycorner
+wvkbd
+ymuse-git

@@ -61,43 +61,33 @@ mkdir -p /etc/zsh
 
 echo 'export ZDOTDIR=$HOME/.config/zsh' > /etc/zsh/zshenv
 
-## SDDM WAYLAND
+## GREETD
 
-echo "Setting up SDDM for KDE Wayland"
+echo '''
+[terminal]
+# The VT to run the greeter on. Can be "next", "current" or a number
+# designating the VT.
+vt = 1
 
-mkdir -p /etc/sddm.conf.d
+# The default session, also known as the greeter.
+[default_session]
+command = "tuigreet --cmd niri-session"
+user = "greeter"
 
-echo "
-[General]
-HaltCommand=/usr/bin/systemctl poweroff
-RebootCommand=/usr/bin/systemctl reboot
-Numlock=off
-DisplayServer=wayland
-GreeterEnvironment=QT_WAYLAND_SHELL_INTEGRATION=layer-shell
+[initial_session]
+command = "niri-session"
+user = "ivo"
+''' > /etc/greetd/config.toml
 
-[Wayland]
-CompositorCommand=kwin_wayland --drm --no-lockscreen --no-global-shortcuts --locale1 --inputmethod maliit-keyboard
-" > /etc/sddm.conf.d/40-kde.conf
+## DISPLAY
 
-echo "
-[Theme]
-Current=breeze
-CursorTheme=breeze_cursors
-EnableAvatars=true
-Font=Fira Mono Medium,11,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,Regular
-" > /etc/sddm.conf.d/40-theme.conf
+mkdir -p /etc/modules-load.d
 
-echo "
-[Users]
-MaximumUid=60513
-MinimumUid=1000
-
-[Autologin]
-Session=plasma
-User=
-" > /etc/sddm.conf.d/40-autologin.conf
-
-echo "Add user to /etc/sddm.conf.d/40-autologin.conf if you want to enable autologin"
+echo '''
+i2c_dev
+ddcci autoprobe_addrs
+ddcci_backlight autoprobe_addrs
+''' > /etc/modules-load.d/40-display.conf
 
 ## SLEEP
 
@@ -121,9 +111,14 @@ sed -i 's/	rw,relatime	/	rw,noatime,commit=60	/' /etc/fstab
 
 echo "Setting up system services"
 
+systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
-systemctl enable earlyoom.service
 systemctl enable docker.service
+systemctl enable earlyoom.service
 systemctl enable fstrim.timer
+systemctl enable greetd.service
+systemctl enable power-profiles-daemon.service
 systemctl enable sshd.service
 systemctl enable tailscaled.service
+systemctl enable udisks2.service
+systemctl enable upowerd.service

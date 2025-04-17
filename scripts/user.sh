@@ -18,36 +18,16 @@ ROOTED_HOST=$(cat /etc/hostname)
 export SSH_ASKPASS="$HOME/ssh_askpass.sh"
 export SSH_ASKPASS_REQUIRE="force" 
 
-rm -rf "$XDG_DATA_HOME"
-rm -rf "$BIN"
-mkdir -p "$BIN"
-mkdir -p "$DOTDIR"
-rm -f "$RESTOW"
-touch "$RESTOW"
+## CLEANUP
 
-## FUNCTIONS
+echo "Deleting config folders"
 
-function dotclone {
-	nodot=$(echo "$1" | sed -e 's/^dot-//')
-	echo "Cloning $1 as $nodot"
-	git clone -q --recurse-submodules "$SSH/$1.git" "$DOTDIR/$nodot"
-	cd "$DOTDIR/$nodot"
-	git init -q
-}
+rm -f "$HOME/.bash*"
 
-function dotstow {
-	mkdir -p "$2"
-	nodot=$(echo "$1" | sed -e 's/^dot-//')
-	echo "Stowing $nodot to $2"
-	dir="$DOTDIR${3:+/}$3"
-	stow --no-folding --target="$2" --dir="$dir" "$nodot"
-	echo "stow --restow --no-folding --target=\"$2\" --dir=\"$dir\" \"$nodot\"" >> "$RESTOW"
-}
-
-function dotclonestow {
-	dotclone "$1"
-	dotstow $@
-}
+for dir in "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$DOTDIR" "$BIN"; do
+	sudo rm -rf "$dir"
+	mkdir -p "$XDG_DATA_HOME"
+done
 
 ## SSH SETUP
 
@@ -73,47 +53,6 @@ chmod 700 ~/.ssh
 chmod 600 ~/.ssh/*
 chmod 644 ~/.ssh/authorized_keys  ~/.ssh/*.pub
 
-## CLEANUP
-
-echo "Deleting config folders"
-
-sudo rm -rf "$XDG_DATA_HOME"
-sudo rm -rf "$XDG_CONFIG_HOME"
-sudo rm -rf "$DOTDIR"
-
-rm -f "$HOME/.bash*"
-
-mkdir -p "$DOTDIR"
-
-## CLONE REPOS
-
-dotclonestow dot-git "$XDG_CONFIG_HOME/git"
-
-dotclonestow dot-zsh "$XDG_CONFIG_HOME/zsh"
-
-dotclonestow dot-tui "$XDG_CONFIG_HOME"
-
-dotclonestow dot-gui "$XDG_CONFIG_HOME"
-
-dotclonestow dot-kde "$XDG_CONFIG_HOME"
-
-dotclonestow dot-python "$XDG_CONFIG_HOME"
-
-dotclonestow dot-nvim "$XDG_CONFIG_HOME/nvim"
-
-dotclonestow dot-systemd "$XDG_CONFIG_HOME/systemd/user"
-
-dotclonestow dot-msmtp "$XDG_CONFIG_HOME/msmtp"
-
-dotclonestow bin "$BIN"
-dotclonestow bin-secrets "$BIN"
-
-dotclonestow dot-desktop "$XDG_DATA_HOME/applications"
-
-dotclonestow dot-okular "$XDG_DATA_HOME/kxmlgui5/okular"
-
-dotclone dot-firefox-css
-
 ## GPG CONFIG
 
 echo "Setting up GPG"
@@ -130,55 +69,23 @@ gpg --import "$HOME/GPG/pass.key"
 gpg --edit-key "Ivo Aguiar Maceira" trust quit
 rm -rf "$HOME/GPG"
 
+## CLONE REPOS
+
+function dotclone {
+	git clone -q --recurse-submodules "$SSH/$1.git" "$DOTDIR/$1"
+	cd "$DOTDIR/$1"
+	source ./restow
+	git init -q
+}
+
+dotclone "secret-dots"
+dotclone "dots"
+
 ## ZSH CONFIG
 
 mkdir -p "$XDG_CONFIG_HOME/zsh/cache"
-mkdir -p "$XDG_CONFIG_HOME/zsh/env"
 
 sudo chsh -s /usr/bin/zsh "$USER"
-
-## KDE CONFIG
-
-echo "Setting up kde config"
-
-chmod 444 "$DOTDIR/kde/kdedefaults/kdeglobals"
-chmod 444 "$DOTDIR/kde/kdedefaults/ksplashrc"
-chmod 444 "$DOTDIR/kde/kglobalshortcutsrc"
-
-## PLASMA CONFIG
-
-echo "Setting up plasma config"
-
-dotclone "dot-plasma"
-dotstow "$ROOTED_HOST" "$XDG_CONFIG_HOME" "plasma"
-
-chmod 444 "$DOTDIR/plasma/$ROOTED_HOST/*"
-
-## PLASMA MONITOR CONFIG
-
-echo "Setting up plasma system monitor page"
-
-dotclone "dot-plasma-monitor"
-dotstow "$ROOTED_HOST" "$XDG_DATA_HOME/plasma-systemmonitor" "plasma-monitor"
-
-## ENV CONFIG
-
-echo "Setting up env config"
-
-dotclone "dot-env" "env"
-dotclone "dot-env-secrets" "env-secrets"
-
-# public env
-dotstow env "$XDG_CONFIG_HOME/zsh/env"
-dotstow env "$XDG_CONFIG_HOME/plasma-workspace/env"
-
-# general secret env
-dotstow ALL "$XDG_CONFIG_HOME/zsh/env" "env-secrets"
-dotstow ALL "$XDG_CONFIG_HOME/plasma-workspace/env" "env-secrets"
-
-# host-specific secret env
-dotstow "$ROOTED_HOST" "$XDG_CONFIG_HOME/zsh/env" "env-secrets"
-dotstow "$ROOTED_HOST" "$XDG_CONFIG_HOME/plasma-workspace/env" "env-secrets"
 
 ## PASSWORD STORE
 
@@ -186,7 +93,7 @@ echo "Setting up password store"
 
 git clone -q "$SSH/pass.git" "$PASSWORD_STORE_DIR"
 
-## INIT THEME FILES
+## THEME SETUP
 
 echo "Setting up base dark theme"
 $BIN/theme-switch gruvbox_dark
@@ -197,18 +104,50 @@ echo "Setting up syncthing config"
 mkdir -p "$HOME/.local/state/syncthing"
 cat "$CONFIG_DIR/syncthing.xml" > "$HOME/.local/state/syncthing/config.xml"
 
-## FINAL STEPS
+## SETUP RESTOW
 
+echo """
+#!/usr/bin/env zsh
+
+cd $DOTDIR/dots
+source ./restow
+
+cd $DOTDIR/secret-dots
+source ./restow
+
+""" > "$RESTOW"
 chmod +x "$RESTOW"
-rm -f "$SSH_ASKPASS"
 
 ## USER SERVICES
 
 echo "Setting up user services"
 
+systemctl --user enable blueman-applet.service
+systemctl --user enable blueman.service
+systemctl --user enable emote.service
 systemctl --user enable foot-server.service
+systemctl --user enable gammastep-indicator.service
 systemctl --user enable git-maintenance@weekly.timer
+systemctl --user enable lavalauncher.service
+systemctl --user enable mpd-mpris.service
+systemctl --user enable mpd.service
+systemctl --user enable mpris-proxy.service
+systemctl --user enable pipewire-pulse.service
+systemctl --user enable pipewire-pulse.socket
+systemctl --user enable pipewire.service
+systemctl --user enable pipewire.socket
 systemctl --user enable profile-cleaner.service
+systemctl --user enable qbittorrent.service
 systemctl --user enable ssh-agent.service
+systemctl --user enable swaync.service
+systemctl --user enable swww-daemon.service
 systemctl --user enable syncthing.service
+systemctl --user enable waybar.service
+systemctl --user enable wireplumber.service
+systemctl --user enable wvkbd.service
+systemctl --user enable xwayland-satellite.service
+
+## FINAL STEPS
+
+rm -f "$SSH_ASKPASS"
 

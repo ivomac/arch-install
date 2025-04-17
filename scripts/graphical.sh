@@ -1,10 +1,3 @@
-## DISABLE INDEXING
-
-echo "Disabling indexing"
-balooctl6 suspend
-balooctl6 disable
-balooctl6 purge
-
 ## JUPYTER SETUP
 
 echo "Setting up jupyter server"

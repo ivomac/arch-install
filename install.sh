@@ -15,31 +15,24 @@ case $1 in
 	relocate)
 		mv "$ROOT_DIR" "/mnt/home/$2/arch-install"
 		;;
-	own)
-		chown -R "$2:$2" "/home/$2/arch-install"
-		;;
-	uninstall)
+	root)
+		echo "Owning home directory"
+		chown -R "$2:$2" "/home/$2"
 		echo "Uninstalling packages"
 		cat "$TXT_DIR/uninstall.txt" | pacman -Rs --noconfirm -
-		;;
-	pkgs)
 		bash "$SCRIPTS_DIR/root-pacman.sh"
 		echo "Installing packages"
 		cat "$TXT_DIR/pacman.txt" | pacman -Syu --noconfirm --needed -
-		;;
-	root)
 		bash "$SCRIPTS_DIR/root.sh"
 		;;
 	user)
 		bash "$SCRIPTS_DIR/user.sh"
-		;;
-	paru)
 		echo "Installing paru"
 		$HOME/.local/bin/paru-install
 		echo "Installing AUR packages"
 		cat "$TXT_DIR/aur.txt" | paru -S --noconfirm --needed -
 		;;
-	post-reboot)
+	graphical)
 		bash "$SCRIPTS_DIR/reboot.sh"
 		;;
 	manual)
