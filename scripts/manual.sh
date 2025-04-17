@@ -1,5 +1,18 @@
-
 RESTOW="$HOME/.local/bin/restow"
+
+## JUPYTER SETUP
+
+echo "Setting up jupyter server"
+
+python -m jupyter_server.auth password $(pass show localhost:8888/jupyter)
+systemctl --user enable jupyter_server.service
+
+## PASSFF SETUP
+
+echo "Installing PassFF host app"
+
+curl -sSL https://codeberg.org/PassFF/passff-host/releases/download/latest/install_host_app.sh | bash -s -- firefox
+
 
 ## BLUETOOTH SETUP
 
@@ -70,7 +83,7 @@ user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 echo "Stowing CSS in firefox profile..."
 mkdir -p "$dir/chrome"
 stow --no-folding --target="$dir/chrome" --dir="$HOME/Projects/00.00-dotfiles" "firefox-css"
-echo "stow --restow --no-folding --target=\"$dir/chrome\" --dir=\"$HOME/Projects/00.00-dotfiles\" \"firefox-css\"" >> "$RESTOW"
+echo "stow --restow --no-folding --target=\"$dir/chrome\" --dir=\"$HOME/Projects/00-dotfiles\" \"firefox-css\"" >> "$RESTOW"
 
 firefox --new-tab localhost:8384 &> /dev/null & disown
 

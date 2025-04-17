@@ -1,7 +1,8 @@
 ## Arch Linux installation
 
 Backup:
-  * data
+  * Media
+  * Docs
   * firefox tabs
   * sidebery settings
 
@@ -12,18 +13,14 @@ cd arch-install-latest
 ./install.sh nvme
 ./install.sh base
 ./install.sh relocate (user)
-arch-chroot /mnt/archinstall
+arch-chroot /mnt
 cd /home/(user)/arch-install
-./install.sh own (user)
-./install.sh uninstall
-./install.sh pkgs
-./install.sh root
-cp ?/ssh-keys/* ~/.ssh/
+./install.sh root (user)
+cp ssh-keys/* ~/.ssh/
 su (user)
 ./install.sh user
-./install.sh paru
 reboot
-./install.sh post-reboot
+./install.sh graphical
 ./install.sh manual
 ./install.sh todo
 ```

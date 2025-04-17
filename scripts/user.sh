@@ -211,4 +211,8 @@ systemctl --user enable git-maintenance@weekly.timer
 systemctl --user enable profile-cleaner.service
 systemctl --user enable ssh-agent.service
 systemctl --user enable syncthing.service
+systemctl --user enable gammastep.service
+systemctl --user enable gammastep-indicator.service
+systemctl --user enable blueman-applet.service
+
 
