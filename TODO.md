@@ -22,7 +22,7 @@
     * Setup folders (like phone camera)
 
 - Firefox:
-    * Restore backups of sidebery settings and tab snapshots
+    * Restore backups of tab snapshots
     * Setup topbar icons
     * Gmail notifications:
         - Gmail > "General" > "Desktop Notifications" > "...enable desktop notif..."

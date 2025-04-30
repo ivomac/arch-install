@@ -113,7 +113,6 @@ echo "Setting up system services"
 
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
-systemctl enable docker.service
 systemctl enable earlyoom.service
 systemctl enable fstrim.timer
 systemctl enable greetd.service

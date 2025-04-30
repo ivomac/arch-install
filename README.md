@@ -4,7 +4,6 @@ Backup:
   * Media
   * Docs
   * firefox tabs
-  * sidebery settings
 
 ```bash
 iwctl station wlan0 connect "$SSID"
