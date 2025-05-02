@@ -16,6 +16,7 @@ cliphist
 cmake
 darktable
 ddcutil
+deno
 devtools
 docker
 docker-compose
