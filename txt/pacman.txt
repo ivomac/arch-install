@@ -89,6 +89,7 @@ postgresql
 power-profiles-daemon
 profile-cleaner
 pyright
+python-debugpy
 python-dotenv
 python-openai
 python-openai-whisper
