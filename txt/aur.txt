@@ -1,5 +1,6 @@
 advcpmv
 albert
+codelldb-bin
 ddcci-driver-linux-dkms-git
 emote
 lavalauncher-git
