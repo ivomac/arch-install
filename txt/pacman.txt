@@ -26,7 +26,6 @@ egl-wayland
 eza
 fd
 firefox
-foliate
 foot
 foot-terminfo
 fzf
@@ -38,6 +37,7 @@ git-delta
 gitleaks
 gitleaks
 gnome-themes-extra
+gopls
 gtklock
 gtklock-playerctl-module
 gtklock-powerbar-module
