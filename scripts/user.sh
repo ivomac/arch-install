@@ -124,7 +124,6 @@ echo "Setting up user services"
 
 systemctl --user enable blueman-applet.service
 systemctl --user enable blueman.service
-systemctl --user enable emote.service
 systemctl --user enable foot-server.service
 systemctl --user enable gammastep-indicator.service
 systemctl --user enable git-maintenance@weekly.timer
