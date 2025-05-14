@@ -24,6 +24,8 @@ case $1 in
 		echo "Installing packages"
 		cat "$TXT_DIR/pacman.txt" | pacman -Syu --noconfirm --needed -
 		bash "$SCRIPTS_DIR/root.sh"
+		echo "Installing font"
+		git clone git@github.com:ivomac/Firosevka.git && makepkg -si -D ./Firosevka && rm -rf Firosevka
 		;;
 	user)
 		bash "$SCRIPTS_DIR/user.sh"
