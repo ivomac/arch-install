@@ -122,19 +122,21 @@ chmod +x "$RESTOW"
 
 echo "Setting up user services"
 
-systemctl --user enable blueman-applet.service
-systemctl --user enable blueman.service
-systemctl --user enable foot-server.service
-systemctl --user enable gammastep-indicator.service
 systemctl --user enable git-maintenance@weekly.timer
+systemctl --user enable bucket.timer
+systemctl --user enable systemd-tmpfiles-clean.timer
+
+systemctl --user enable foot-server.socket
+systemctl --user enable pipewire.socket
+systemctl --user enable pipewire-pulse.socket
+systemctl --user enable gpg-agent.socket
+systemctl --user enable mpd.socket
+
+systemctl --user enable blueman-applet.service
+systemctl --user enable gammastep-indicator.service
 systemctl --user enable lavalauncher.service
 systemctl --user enable mpd-mpris.service
-systemctl --user enable mpd.service
 systemctl --user enable mpris-proxy.service
-systemctl --user enable pipewire-pulse.service
-systemctl --user enable pipewire-pulse.socket
-systemctl --user enable pipewire.service
-systemctl --user enable pipewire.socket
 systemctl --user enable profile-cleaner.service
 systemctl --user enable qbittorrent.service
 systemctl --user enable ssh-agent.service

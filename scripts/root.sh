@@ -134,13 +134,17 @@ sed -i 's/	rw,relatime	/	rw,noatime,commit=60	/' /etc/fstab
 
 echo "Setting up system services"
 
+systemctl enable reflector.timer
+systemctl enable fstrim.timer
+
+systemctl enable docker.socket
+
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 systemctl enable earlyoom.service
-systemctl enable fstrim.timer
 systemctl enable greetd.service
 systemctl enable power-profiles-daemon.service
 systemctl enable sshd.service
 systemctl enable tailscaled.service
 systemctl enable udisks2.service
-systemctl enable upowerd.service
+
