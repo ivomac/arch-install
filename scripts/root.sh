@@ -6,13 +6,36 @@
 ori_file=$(ls /boot/loader/entries/*linux.conf)
 ori_content=$(cat "$ori_file" | sed -e 's/title.*/title   Arch Linux/')
 
-echo "$ori_content fbcon=font:TER16x32 video=1920x1080@60 sysrq_always_enabled=1 acpi_enforce_resources=lax nowatchdog nmi_watchdog=0 modprobe.blacklist=iTCO_wdt,sp5100_tco sysctl.vm.swappiness=35 quiet loglevel=3 udev.log_level=3 rd.udev.log_level=3 systemd.show_status=auto
+echo "$ori_content fbcon=font:TER16x32 video=1920x1080@60 sysrq_always_enabled=1 acpi_enforce_resources=lax nowatchdog nmi_watchdog=0 modprobe.blacklist=iTCO_wdt,sp5100_tco sysctl.vm.swappiness=35 splash quiet loglevel=3 udev.log_level=3 rd.udev.log_level=3 systemd.show_status=auto
 " > "/boot/loader/entries/arch.conf"
 
 echo "default arch.conf
 timeout 0
 console-mode keep
 " > "/boot/loader/loader.conf"
+
+## MKINITCPIO
+
+echo "Setting up mkinitcpio"
+
+while [ "$user_input" != "amd" ] || [ "$user_input" != "intel" ]; do
+	read -p "Enter GPU type (amd, intel): " user_input
+done
+
+case $user_input in
+    amd)
+        VIDEO_DRIVER="amdgpu"
+        ;;
+    intel)
+        VIDEO_DRIVER="i915"
+        ;;
+esac
+
+echo "MODULES=($VIDEO_DRIVER)
+BINARIES=()
+FILES=()
+HOOKS=(systemd microcode autodetect modconf kms sd-vconsole block filesystems fsck)
+" > /etc/mkinitcpio.conf
 
 ## SUDOERS
 
