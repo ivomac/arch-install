@@ -2,9 +2,9 @@ advcpmv
 albert
 codelldb-bin
 ddcci-driver-linux-dkms-git
-emote
 lavalauncher-git
 lazydocker-bin
+local-lua-debugger-vscode-git
 multi-git-status
 nnn-nerd
 paru
@@ -14,5 +14,8 @@ qimgv-git
 selectdefaultapplication-git
 vim-language-server
 waycorner
+wdisplays-git
 wvkbd
+yazi
+yek
 ymuse-git
