@@ -6,6 +6,7 @@ atool
 base
 bash-completion
 bash-language-server
+taplo
 bat
 blueman
 bluez-tools
@@ -79,6 +80,8 @@ pass-otp
 pavucontrol
 pcmanfm-qt
 pdfarranger
+perl-file-homedir
+perl-yaml-tiny
 postgresql
 power-profiles-daemon
 profile-cleaner

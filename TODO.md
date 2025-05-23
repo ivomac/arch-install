@@ -1,4 +1,8 @@
 
+- pipx:
+    * ty
+    * aider
+
 - Sensors:
     * Run `sensors-detect`
 

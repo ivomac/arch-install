@@ -19,10 +19,10 @@ case $1 in
 		echo "Owning home directory"
 		chown -R "$2:$2" "/home/$2"
 		echo "Uninstalling packages"
-		cat "$TXT_DIR/uninstall.txt" | pacman -Rs --noconfirm -
+		pacman -Rs --noconfirm < "$TXT_DIR/uninstall.txt"
 		bash "$SCRIPTS_DIR/root-pacman.sh"
 		echo "Installing packages"
-		cat "$TXT_DIR/pacman.txt" | pacman -Syu --noconfirm --needed -
+		pacman -Syu --noconfirm --needed < "$TXT_DIR/pacman.txt"
 		bash "$SCRIPTS_DIR/root.sh"
 		echo "Installing font"
 		git clone git@github.com:ivomac/Firosevka.git && makepkg -si -D ./Firosevka && rm -rf Firosevka
@@ -30,9 +30,9 @@ case $1 in
 	user)
 		bash "$SCRIPTS_DIR/user.sh"
 		echo "Installing paru"
-		$HOME/.local/bin/paru-install
+		"$HOME/.local/bin/paru-install"
 		echo "Installing AUR packages"
-		cat "$TXT_DIR/aur.txt" | paru -S --noconfirm --needed -
+		paru -S --noconfirm --needed < "$TXT_DIR/aur.txt" 
 		;;
 	graphical)
 		bash "$SCRIPTS_DIR/reboot.sh"

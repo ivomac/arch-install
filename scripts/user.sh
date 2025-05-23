@@ -118,6 +118,10 @@ source ./restow
 """ > "$RESTOW"
 chmod +x "$RESTOW"
 
+## SETUP YAZI PLUGINS
+
+ya pack -u
+
 ## USER SERVICES
 
 echo "Setting up user services"
