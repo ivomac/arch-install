@@ -13,8 +13,6 @@ BIN="$HOME/.local/bin"
 
 RESTOW="$HOME/.local/bin/restow"
 
-ROOTED_HOST=$(cat /etc/hostname)
-
 export SSH_ASKPASS="$HOME/ssh_askpass.sh"
 export SSH_ASKPASS_REQUIRE="force" 
 
@@ -38,7 +36,7 @@ else
 	exit 1
 fi
 
-read -s -p "one-time ssh-key unlock: " SSH_PASS
+read -r -s -p "one-time ssh-key unlock: " SSH_PASS
 export SSH_PASS
 
 echo "#!/usr/bin/bash
@@ -48,7 +46,7 @@ chmod +x "$SSH_ASKPASS"
 
 echo -e "\nSetting up ssh permissions"
 
-sudo chown -R $USER:$USER ~/.ssh
+sudo chown -R "$USER:$USER" ~/.ssh
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/*
 chmod 644 ~/.ssh/authorized_keys  ~/.ssh/*.pub
@@ -71,15 +69,27 @@ rm -rf "$HOME/GPG"
 
 ## CLONE REPOS
 
-function dotclone {
-	git clone -q --recurse-submodules "$SSH/$1.git" "$DOTDIR/$1"
-	cd "$DOTDIR/$1"
-	source ./restow
-	git init -q
-}
+git clone -q --recurse-submodules "$SSH/secret-dots.git" "$DOTDIR/secret-dots"
+git clone -q --recurse-submodules "$SSH/dots.git" "$DOTDIR/dots"
 
-dotclone "secret-dots"
-dotclone "dots"
+## SETUP RESTOW
+
+echo """
+#!/usr/bin/env zsh
+
+cd $DOTDIR/secret-dots
+source ./restow
+
+cd $DOTDIR/dots
+source ./restow
+
+""" > "$RESTOW"
+chmod +x "$RESTOW"
+
+"$RESTOW"
+
+git -C "$DOTDIR/secret-dots" init -q
+git -C "$DOTDIR/dots" init -q
 
 ## ZSH CONFIG
 
@@ -96,7 +106,7 @@ git clone -q "$SSH/pass.git" "$PASSWORD_STORE_DIR"
 ## THEME SETUP
 
 echo "Setting up base dark theme"
-$BIN/theme-switch gruvbox_dark
+"$BIN/theme-switch" gruvbox_dark
 
 ## SET SYNCTHING CONFIG
 
@@ -104,23 +114,14 @@ echo "Setting up syncthing config"
 mkdir -p "$HOME/.local/state/syncthing"
 cat "$CONFIG_DIR/syncthing.xml" > "$HOME/.local/state/syncthing/config.xml"
 
-## SETUP RESTOW
-
-echo """
-#!/usr/bin/env zsh
-
-cd $DOTDIR/dots
-source ./restow
-
-cd $DOTDIR/secret-dots
-source ./restow
-
-""" > "$RESTOW"
-chmod +x "$RESTOW"
-
 ## SETUP YAZI PLUGINS
 
 ya pack -u
+
+## PIPX INSTALL
+
+pipx install ty
+pipx install aider-chat
 
 ## USER SERVICES
 
