@@ -1,41 +1,40 @@
-
 # SU SETUP
 
 ## BOOT
 
 ori_file=$(ls /boot/loader/entries/*linux.conf)
-ori_content=$(cat "$ori_file" | sed -e 's/title.*/title   Arch Linux/')
+ori_content=$(sed -e 's/title.*/title   Arch Linux/' <"$ori_file")
 
 echo "$ori_content fbcon=font:TER16x32 video=1920x1080@60 sysrq_always_enabled=1 acpi_enforce_resources=lax nowatchdog nmi_watchdog=0 modprobe.blacklist=iTCO_wdt,sp5100_tco sysctl.vm.swappiness=35 splash quiet loglevel=3 udev.log_level=3 rd.udev.log_level=3 systemd.show_status=auto
-" > "/boot/loader/entries/arch.conf"
+" >"/boot/loader/entries/arch.conf"
 
 echo "default arch.conf
 timeout 0
 console-mode keep
-" > "/boot/loader/loader.conf"
+" >"/boot/loader/loader.conf"
 
 ## MKINITCPIO
 
 echo "Setting up mkinitcpio"
 
-while [ "$user_input" != "amd" ] || [ "$user_input" != "intel" ]; do
-	read -p "Enter GPU type (amd, intel): " user_input
+while [ "$user_input" != "amd" ] && [ "$user_input" != "intel" ]; do
+  read -r -p "Enter GPU type (amd, intel): " user_input
 done
 
 case $user_input in
-    amd)
-        VIDEO_DRIVER="amdgpu"
-        ;;
-    intel)
-        VIDEO_DRIVER="i915"
-        ;;
+amd)
+  VIDEO_DRIVER="amdgpu"
+  ;;
+intel)
+  VIDEO_DRIVER="i915"
+  ;;
 esac
 
 echo "MODULES=($VIDEO_DRIVER)
 BINARIES=()
 FILES=()
 HOOKS=(systemd microcode autodetect modconf kms sd-vconsole block filesystems fsck)
-" > /etc/mkinitcpio.conf
+" >/etc/mkinitcpio.conf
 
 ## SUDOERS
 
@@ -44,19 +43,19 @@ echo "Setting up sudoers"
 echo "
 Defaults targetpw
 ALL ALL=(ALL:ALL) ALL
-" > /etc/sudoers.d/40-targetpw
+" >/etc/sudoers.d/40-targetpw
 
 ## ACTIVATE SysRq
 
 echo "Activating SysRq"
 
-echo "kernel.sysrq=256" > /etc/sysctl.d/40-sysrq.conf
+echo "kernel.sysrq=256" >/etc/sysctl.d/40-sysrq.conf
 
 ## QUIET
 
 echo "Quieting kernel"
 
-echo "kernel.printk=3 3 3 3" > /etc/sysctl.d/40-quiet.conf
+echo "kernel.printk=3 3 3 3" >/etc/sysctl.d/40-quiet.conf
 
 ## CHANGE SHUTDOWN TIMEOUT
 
@@ -73,8 +72,8 @@ DefaultDeviceTimeoutSec=5s
 mkdir -p /etc/systemd/system.conf.d
 mkdir -p /etc/systemd/user.conf.d
 
-echo "$timeout" > /etc/systemd/system.conf.d/40-shutdown.conf
-echo "$timeout" > /etc/systemd/user.conf.d/40-shutdown.conf
+echo "$timeout" >/etc/systemd/system.conf.d/40-shutdown.conf
+echo "$timeout" >/etc/systemd/user.conf.d/40-shutdown.conf
 
 ## ZSH HOME
 
@@ -82,27 +81,26 @@ echo "Setting ZSH home"
 
 mkdir -p /etc/zsh
 
-echo 'export ZDOTDIR=$HOME/.config/zsh' > /etc/zsh/zshenv
+echo 'export ZDOTDIR=$HOME/.config/zsh' >/etc/zsh/zshenv
 
 ## GREETD
 
-echo '''
+echo """
 [terminal]
-# The VT to run the greeter on. Can be "next", "current" or a number
-# designating the VT.
 vt = 1
 
-# The default session, also known as the greeter.
 [default_session]
-command = "tuigreet --cmd niri-session"
-user = "greeter"
+command = 'tuigreet --cmd niri-session'
+user = 'greeter'
 
 [initial_session]
-command = "niri-session"
-user = "ivo"
-''' > /etc/greetd/config.toml
+command = 'niri-session'
+user = '$1'
+""" >/etc/greetd/config.toml
 
 ## DISPLAY
+
+usermod -a -G video "$1"
 
 mkdir -p /etc/modules-load.d
 
@@ -110,7 +108,7 @@ echo '''
 i2c_dev
 ddcci autoprobe_addrs
 ddcci_backlight autoprobe_addrs
-''' > /etc/modules-load.d/40-display.conf
+''' >/etc/modules-load.d/40-display.conf
 
 ## SLEEP
 
@@ -124,7 +122,7 @@ AllowSuspend=no
 AllowHibernation=no
 AllowHybridSleep=no
 AllowSuspendThenHibernate=no
-" > /etc/systemd/sleep.conf.d/40-disable-suspend.conf
+" >/etc/systemd/sleep.conf.d/40-disable-suspend.conf
 
 ## FSTAB
 
@@ -147,4 +145,3 @@ systemctl enable power-profiles-daemon.service
 systemctl enable sshd.service
 systemctl enable tailscaled.service
 systemctl enable udisks2.service
-

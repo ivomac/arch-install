@@ -17,7 +17,7 @@ cd /home/(user)/arch-install
 ./install.sh root (user)
 cp ssh-keys/* ~/.ssh/
 su (user)
-./install.sh user
+./install.sh user (user)
 reboot
 ./install.sh graphical
 ./install.sh manual
