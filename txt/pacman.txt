@@ -50,6 +50,7 @@ julia
 jupyter-notebook
 jupyterlab
 lazygit
+libisoburn
 libreoffice-fresh
 linux-headers
 llvm
@@ -68,6 +69,7 @@ ncdu
 neovim
 network-manager-applet
 niri
+nodejs
 ntfs-3g
 nvme-cli
 nwg-look
@@ -121,6 +123,7 @@ starship
 stow
 stylua
 swaync
+swayosd
 swww
 syncthing
 systembus-notify

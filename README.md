@@ -6,7 +6,7 @@ Backup:
   * firefox tabs
 
 ```bash
-iwctl station wlan0 connect "$SSID"
+iwctl station wlan0 connect (SSID)
 curl -L https://github.com/ivomac/arch-install/archive/refs/tags/latest.tar.gz | tar -xzv
 cd arch-install-latest
 ./install.sh nvme

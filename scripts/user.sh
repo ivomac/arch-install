@@ -146,6 +146,7 @@ systemctl --user enable profile-cleaner.service
 systemctl --user enable qbittorrent.service
 systemctl --user enable ssh-agent.service
 systemctl --user enable swaync.service
+systemctl --user enable swayosd.service
 systemctl --user enable swww-daemon.service
 systemctl --user enable syncthing.service
 systemctl --user enable waybar.service
