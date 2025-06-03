@@ -115,6 +115,7 @@ rclone
 reflector
 ripgrep
 ruff
+rustup
 sddm-kcm
 shellcheck
 spectacle
