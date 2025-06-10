@@ -132,6 +132,10 @@ tailscale
 terminus-font
 texlab
 texlive
+thunar
+thunar-archive-plugin
+thunar-media-tags-plugin
+thunar-volman
 tree-sitter-cli
 ttf-fira-sans
 ttf-inconsolata

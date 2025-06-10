@@ -1,71 +1,52 @@
+#!/usr/bin/env zsh
 
-SCRIPT="$(realpath "${BASH_SOURCE[0]}")"
-ROOT_DIR="$(dirname "$SCRIPT")"
+setopt errexit nounset pipefail no_nomatch err_return noclobber
 
-export SCRIPT
-export ROOT_DIR
+ROOT="${0:A:h}"
 
-export SCRIPTS_DIR="$ROOT_DIR/scripts"
-export CONFIG_DIR="$ROOT_DIR/config"
-export TXT_DIR="$ROOT_DIR/txt"
+SCRIPTS="$ROOT/scripts"
+CONFIG="$ROOT/config"
+PKGS="$ROOT/pkgs"
 
-case $1 in
-	nvme)
-		python "$SCRIPTS_DIR/nvme.py"
-		;;
-	base)
-		archinstall --config "$CONFIG_DIR/archinstall.json"
-		;;
-	relocate)
-    [[ -d "/mnt/home/$2" ]] || {
-      echo "Input should be a user. \$2:$2"
-      exit 1
-    }
-
-		mv "$ROOT_DIR" "/mnt/home/$2/arch-install"
-		;;
-	root)
-    [[ -d "/home/$2" ]] || {
-      echo "Input should be a user. \$2:$2"
-      exit 1
-    }
-
-		echo "Owning home directory"
-		chown -R "$2:$2" "/home/$2"
-		echo "Uninstalling packages"
-		pacman -Rs --noconfirm - < "$TXT_DIR/uninstall.txt"
-		bash "$SCRIPTS_DIR/root-pacman.sh"
-		echo "Installing packages"
-		pacman -Syu --noconfirm --needed - < "$TXT_DIR/pacman.txt"
-		bash "$SCRIPTS_DIR/root.sh" "$2"
-		;;
-	user)
-    [[ -d "/home/$2" ]] || {
-      echo "Input should be a user. \$2:$2"
-      exit 1
-    }
-
-		bash "$SCRIPTS_DIR/user.sh" "$2"
-		echo "Installing paru"
-		"$HOME/.local/bin/paru-install"
-		echo "Installing AUR packages"
-		paru -S --noconfirm --needed - < "$TXT_DIR/aur.txt" 
-		echo "Installing Yazi plugins"
-		ya pack -u
-		echo "Installing font"
-		git clone git@github.com:ivomac/Firosevka.git && makepkg -si -D ./Firosevka && rm -rf Firosevka
-		;;
-	graphical)
-		bash "$SCRIPTS_DIR/reboot.sh"
-		;;
-	manual)
-		bash "$SCRIPTS_DIR/manual.sh"
-		;;
-	todo)
-		cat "$ROOT_DIR/TODO.md"
-		;;
-	*)
-		cat "$ROOT_DIR/README.md"
-		;;
+case ${1} in
+  nvme)
+    python "$SCRIPTS/nvme.py"
+    ;;
+  base)
+    archinstall --config "$CONFIG/archinstall.json"
+    ;;
+  relocate)
+    userhomes=(/mnt/home/*)
+    [[ -n "${userhomes[1]}" ]]
+    for HOME in "${userhomes[@]}"; do
+      echo "HOME=$HOME: copying to ~/arch-install"
+      cp -R "$ROOT" "${HOME}/arch-install"
+    done
+    ;;
+  root)
+    userhomes=(/home/*)
+    [[ -n "${userhomes[1]}" ]]
+    for HOME in "${userhomes[@]}"; do
+      USER="${HOME:A:t}"
+      echo "HOME=$HOME: Owning home directory"
+      chown -R "$USER:$USER" "/home/$USER"
+      source "$SCRIPTS/pacman.sh"
+      source "$SCRIPTS/root.sh"
+    done
+    ;;
+  user)
+    [[ -n "$USER" ]]
+    sudo usermod -a -G video "$USER"
+    source "$SCRIPTS/user.sh"
+    source "$SCRIPTS/aur.sh"
+    ;;
+  graphical)
+    [[ -n "$USER" ]]
+    source "$SCRIPTS/graphical.sh"
+    cat "$ROOT/TODO.md"
+    ;;
+  *)
+    cat "$ROOT/README.md"
+    ;;
 esac
 

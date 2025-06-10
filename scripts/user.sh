@@ -16,13 +16,29 @@ RESTOW="$HOME/.local/bin/restow"
 export SSH_ASKPASS="$HOME/ssh_askpass.sh"
 export SSH_ASKPASS_REQUIRE="force" 
 
+## AUTOLOGIN
+
+sudo echo """
+[terminal]
+vt = 1
+
+[default_session]
+command = 'tuigreet --cmd niri-session'
+user = 'greeter'
+
+[initial_session]
+command = 'niri-session'
+user = '$USER'
+""" >|/etc/greetd/config.toml
+
+
 ## SSH SETUP
 
 if [ -d "$HOME/.ssh" ]; then
-	echo "Found .ssh directory"
+  echo "Found .ssh directory"
 else
-	echo "No .ssh directory found, exiting"
-	exit 1
+  echo "No .ssh directory found, exiting"
+  exit 1
 fi
 
 read -r -s -p "one-time ssh-key unlock: " SSH_PASS
@@ -30,7 +46,7 @@ export SSH_PASS
 
 echo "#!/usr/bin/bash
 echo \"$SSH_PASS\"
-" > "$SSH_ASKPASS"
+" >| "$SSH_ASKPASS"
 chmod +x "$SSH_ASKPASS"
 
 echo -e "\nSetting up ssh permissions"
@@ -47,8 +63,8 @@ echo "Deleting config folders"
 rm -f "$HOME/.bash*"
 
 for dir in "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$DOTDIR" "$BIN"; do
-	sudo rm -rf "$dir"
-	mkdir -p "$dir"
+  sudo rm -rf "$dir"
+  mkdir -p "$dir"
 done
 
 ## GPG CONFIG
@@ -83,7 +99,7 @@ source ./restow
 cd $DOTDIR/dots
 source ./restow
 
-""" > "$RESTOW"
+""" >| "$RESTOW"
 chmod +x "$RESTOW"
 
 "$RESTOW"
@@ -112,7 +128,7 @@ echo "Setting up base dark theme"
 
 echo "Setting up syncthing config"
 mkdir -p "$HOME/.local/state/syncthing"
-cat "$CONFIG_DIR/syncthing.xml" > "$HOME/.local/state/syncthing/config.xml"
+cat "$CONFIG/syncthing.xml" >| "$HOME/.local/state/syncthing/config.xml"
 
 ## PIPX INSTALL
 

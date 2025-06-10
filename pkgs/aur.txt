@@ -7,7 +7,6 @@ lavalauncher-git
 lazydocker-bin
 local-lua-debugger-vscode-git
 multi-git-status
-nnn-nerd
 python-dataclasses-json
 paru
 python-anthropic

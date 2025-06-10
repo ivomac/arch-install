@@ -1,28 +1,10 @@
 
-- Sensors:
-    * Run `sensors-detect`
-
-- Bucket:
-    * Enable automatic backups:
-        systemctl --user enable bucket.timer
-
-- KDE:
-    * Set user avatar
-    * Set wallpaper (including lockscreen)
-    * Copy settings to splash screen
-    * KDEconnect:
-        - Pair with phone
-
-- Qbittorrent:
-    * Add to autostart
-
 - RClone
 
 - Syncthing:
     * Setup folders (like phone camera)
 
 - Firefox:
-    * Restore backups of tab snapshots
     * Setup topbar icons
     * Gmail notifications:
         - Gmail > "General" > "Desktop Notifications" > "...enable desktop notif..."
@@ -53,18 +35,3 @@
 
         - thepiratebay.org:
             https://thepiratebay.org/search.php?q=%s&orderby=seeders
-
-- AUR/Multilib packages to install:
-    Games:
-        steam
-        protonup-qt
-    ML:
-        amdgpu_top
-        python-huggingface-hub
-        python-tensorstore
-        python-torchfunc
-        python-torchaudio(-rocm)
-        python-torchvision(-rocm)
-    Other:
-        lazydocker-bin
-
