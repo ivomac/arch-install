@@ -16,17 +16,6 @@ RESTOW="$HOME/.local/bin/restow"
 export SSH_ASKPASS="$HOME/ssh_askpass.sh"
 export SSH_ASKPASS_REQUIRE="force" 
 
-## CLEANUP
-
-echo "Deleting config folders"
-
-rm -f "$HOME/.bash*"
-
-for dir in "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$DOTDIR" "$BIN"; do
-	sudo rm -rf "$dir"
-	mkdir -p "$XDG_DATA_HOME"
-done
-
 ## SSH SETUP
 
 if [ -d "$HOME/.ssh" ]; then
@@ -50,6 +39,17 @@ sudo chown -R "$USER:$USER" ~/.ssh
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/*
 chmod 644 ~/.ssh/authorized_keys  ~/.ssh/*.pub
+
+## CLEANUP
+
+echo "Deleting config folders"
+
+rm -f "$HOME/.bash*"
+
+for dir in "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$DOTDIR" "$BIN"; do
+	sudo rm -rf "$dir"
+	mkdir -p "$dir"
+done
 
 ## GPG CONFIG
 
@@ -113,10 +113,6 @@ echo "Setting up base dark theme"
 echo "Setting up syncthing config"
 mkdir -p "$HOME/.local/state/syncthing"
 cat "$CONFIG_DIR/syncthing.xml" > "$HOME/.local/state/syncthing/config.xml"
-
-## SETUP YAZI PLUGINS
-
-ya pack -u
 
 ## PIPX INSTALL
 

@@ -33,13 +33,11 @@ case $1 in
 		echo "Owning home directory"
 		chown -R "$2:$2" "/home/$2"
 		echo "Uninstalling packages"
-		pacman -Rs --noconfirm < "$TXT_DIR/uninstall.txt"
+		pacman -Rs --noconfirm - < "$TXT_DIR/uninstall.txt"
 		bash "$SCRIPTS_DIR/root-pacman.sh"
 		echo "Installing packages"
-		pacman -Syu --noconfirm --needed < "$TXT_DIR/pacman.txt"
-		bash "$SCRIPTS_DIR/root.sh $2"
-		echo "Installing font"
-		git clone git@github.com:ivomac/Firosevka.git && makepkg -si -D ./Firosevka && rm -rf Firosevka
+		pacman -Syu --noconfirm --needed - < "$TXT_DIR/pacman.txt"
+		bash "$SCRIPTS_DIR/root.sh" "$2"
 		;;
 	user)
     [[ -d "/home/$2" ]] || {
@@ -47,11 +45,15 @@ case $1 in
       exit 1
     }
 
-		bash "$SCRIPTS_DIR/user.sh $2"
+		bash "$SCRIPTS_DIR/user.sh" "$2"
 		echo "Installing paru"
 		"$HOME/.local/bin/paru-install"
 		echo "Installing AUR packages"
-		paru -S --noconfirm --needed < "$TXT_DIR/aur.txt" 
+		paru -S --noconfirm --needed - < "$TXT_DIR/aur.txt" 
+		echo "Installing Yazi plugins"
+		ya pack -u
+		echo "Installing font"
+		git clone git@github.com:ivomac/Firosevka.git && makepkg -si -D ./Firosevka && rm -rf Firosevka
 		;;
 	graphical)
 		bash "$SCRIPTS_DIR/reboot.sh"

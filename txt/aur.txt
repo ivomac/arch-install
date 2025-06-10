@@ -1,3 +1,4 @@
+otf-openmoji
 advcpmv
 albert
 codelldb-bin
