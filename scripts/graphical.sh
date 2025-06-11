@@ -73,7 +73,6 @@ firefox --new-tab "accounts.firefox.com/?context=fx_desktop_v3&entrypoint=fxa_ap
 firefox --new-tab "accounts.google.com/v3/signin/identifier?flowName=GlifWebSignIn" &> /dev/null & disown
 firefox --new-tab "github.com/login" &> /dev/null & disown
 firefox --new-tab localhost:8384 &> /dev/null & disown
-firefox --new-tab localhost:8888 &> /dev/null & disown
 firefox --new-tab "github.com/login/device" &> /dev/null & disown
 
 gist --login
@@ -82,10 +81,13 @@ echo "Login to tailscale"
 sudo tailscale up
 
 echo "Detect sensors"
-sensors-detect
+sudo sensors-detect --auto
+sudo systemctl enable --now lm_sensors.service
 
 ## POWER PROFILE
 
 echo "Set up power profiles?"
-
 powerprofilesctl list-actions
+
+echo "Uninstall packages?"
+sudo pacman -Rs xorg-server

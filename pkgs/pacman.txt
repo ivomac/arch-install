@@ -120,7 +120,6 @@ reflector
 ripgrep
 ruff
 rustup
-sddm-kcm
 shellcheck
 socat
 spectacle
