@@ -33,6 +33,7 @@
   "packages": [
     "git",
     "firefox",
+    "zsh",
     "foot"
   ],
   "parallel downloads": 5,

@@ -33,6 +33,7 @@ foot-terminfo
 fzf
 gammastep
 gcc-fortran
+gdb
 gist
 git
 gitleaks
@@ -45,13 +46,13 @@ gtklock-userinfo-module
 hugin
 inetutils
 inkscape
-jedi-language-server
 jq
 julia
 jupyter-notebook
 jupyterlab
 lazygit
 libisoburn
+libqalculate
 libreoffice-fresh
 linux-headers
 llvm
@@ -63,6 +64,7 @@ mariadb
 mariadb-clients
 marksman
 mpc
+mpd
 mpd-mpris
 msmtp
 mtpfs
@@ -118,6 +120,7 @@ ruff
 rustup
 sddm-kcm
 shellcheck
+socat
 spectacle
 sshfs
 starship
@@ -150,10 +153,12 @@ visidata
 vlc
 vscode-html-languageserver
 vscode-json-languageserver
+waybar
 wireless_tools
 wl-clipboard
 xdg-desktop-portal-wlr
 xdg-user-dirs
+xwayland-satellite
 yaml-language-server
 yt-dlp
 zip

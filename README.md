@@ -7,7 +7,7 @@ Backup:
 ```bash
 iwctl station wlan0 connect (SSID)
 curl -L https://github.com/ivomac/arch-install/archive/refs/tags/latest.tar.gz | tar -xzv
-cd arch-install
+cd arch-install-latest
 ./install.sh nvme
 ./install.sh base
 ./install.sh relocate
@@ -18,6 +18,7 @@ cd /home/(user)/arch-install
 cp ssh-keys/* /home/(user)/.ssh/
 ./install.sh user
 reboot
-./install.sh manual
+nmcli device wifi connect (SSID) password (pass)
+./install.sh graphical
 ```
 

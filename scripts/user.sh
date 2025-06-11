@@ -1,20 +1,21 @@
 
 ## ENVIRONMENT VARIABLES
 
-SSH="git@github.com:ivomac"
+export SSH="git@github.com:ivomac"
 
-DOTDIR="$HOME/Projects/00.00-dotfiles"
-XDG_DATA_HOME="$HOME/.local/share"
-XDG_CONFIG_HOME="$HOME/.config"
-GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
-PASSWORD_STORE_DIR="$XDG_CONFIG_HOME/password-store"
+export DOTDIR="$HOME/Projects/00.00-dotfiles"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export PASSWORD_STORE_DIR="$XDG_CONFIG_HOME/password-store"
 
-BIN="$HOME/.local/bin"
+export BIN="$HOME/.local/bin"
 
-RESTOW="$HOME/.local/bin/restow"
+export RESTOW="$HOME/.local/bin/restow"
 
 export SSH_ASKPASS="$HOME/ssh_askpass.sh"
 export SSH_ASKPASS_REQUIRE="force" 
+
+export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 ## AUTOLOGIN
 
@@ -29,8 +30,7 @@ user = 'greeter'
 [initial_session]
 command = 'niri-session'
 user = '$USER'
-""" >|/etc/greetd/config.toml
-
+""" | sudo tee /etc/greetd/config.toml > /dev/null
 
 ## SSH SETUP
 
@@ -41,7 +41,8 @@ else
   exit 1
 fi
 
-read -r -s -p "one-time ssh-key unlock: " SSH_PASS
+echo "one-time ssh-key unlock:" 
+read -r -s SSH_PASS
 export SSH_PASS
 
 echo "#!/usr/bin/bash
@@ -60,9 +61,9 @@ chmod 644 ~/.ssh/authorized_keys  ~/.ssh/*.pub
 
 echo "Deleting config folders"
 
-rm -f "$HOME/.bash*"
+rm -f $HOME/.bash*
 
-for dir in "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$DOTDIR" "$BIN"; do
+for dir in "$HOME/GPG" "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$DOTDIR" "$BIN"; do
   sudo rm -rf "$dir"
   mkdir -p "$dir"
 done
@@ -70,18 +71,16 @@ done
 ## GPG CONFIG
 
 echo "Setting up GPG"
-
 mkdir -p "$GNUPGHOME"
-
 chmod 700 "$GNUPGHOME"
 
 git clone -q "git@github.com:ivomac/GPG.git" "$HOME/GPG"
 
 cp "$HOME/GPG/gpg-agent.conf" "$GNUPGHOME/"
+chmod 600 "$GNUPGHOME/gpg-agent.conf"
 
-gpg --import "$HOME/GPG/pass.key"
-gpg --edit-key "Ivo Aguiar Maceira" trust quit
-rm -rf "$HOME/GPG"
+gpgconf --kill gpg-agent
+gpgconf --launch gpg-agent
 
 ## CLONE REPOS
 
@@ -119,21 +118,11 @@ echo "Setting up password store"
 
 git clone -q "$SSH/pass.git" "$PASSWORD_STORE_DIR"
 
-## THEME SETUP
-
-echo "Setting up base dark theme"
-"$BIN/theme-switch" gruvbox_dark
-
 ## SET SYNCTHING CONFIG
 
 echo "Setting up syncthing config"
 mkdir -p "$HOME/.local/state/syncthing"
 cat "$CONFIG/syncthing.xml" >| "$HOME/.local/state/syncthing/config.xml"
-
-## PIPX INSTALL
-
-pipx install ty
-pipx install aider-chat
 
 ## USER SERVICES
 
@@ -146,21 +135,21 @@ systemctl --user enable systemd-tmpfiles-clean.timer
 systemctl --user enable foot-server.socket
 systemctl --user enable pipewire.socket
 systemctl --user enable pipewire-pulse.socket
-systemctl --user enable gpg-agent.socket
 systemctl --user enable mpd.socket
 
-systemctl --user enable blueman-applet.service
 systemctl --user enable gammastep-indicator.service
 systemctl --user enable lavalauncher.service
 systemctl --user enable mpd-mpris.service
 systemctl --user enable mpris-proxy.service
 systemctl --user enable profile-cleaner.service
+
 systemctl --user enable qbittorrent.service
 systemctl --user enable ssh-agent.service
 systemctl --user enable swaync.service
 systemctl --user enable swayosd.service
 systemctl --user enable swww-daemon.service
 systemctl --user enable syncthing.service
+
 systemctl --user enable waybar.service
 systemctl --user enable wireplumber.service
 systemctl --user enable wvkbd.service

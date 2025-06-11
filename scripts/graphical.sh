@@ -1,4 +1,20 @@
 
+## GPG IMPORT
+
+gpg --import "$HOME/GPG/pass.key"
+gpg --edit-key "Ivo Aguiar Maceira" trust quit
+rm -rf "$HOME/GPG"
+
+## THEME SETUP
+
+echo "Setting up base dark theme"
+"$BIN/theme-switch" gruvbox_dark
+
+## PIPX INSTALL
+
+pipx install ty
+pipx install aider-chat
+
 ## FIREFOX SETUP
 
 echo "Removing unnused firefox profile..."
@@ -33,7 +49,8 @@ bluetoothctl
 ## QBITTORRENT SETUP
 
 echo "Setting up qBitTorrent config"
-read -r -p "Enter the root directory for torrents (/Torrents/ will be appended): " TORRENTROOT
+echo "Enter the root directory for torrents (/Torrents/ will be appended):"
+read -r TORRENTROOT
 mkdir -p "$XDG_CONFIG_HOME/qBittorrent"
 sed -e "s:TORRENTROOT:$TORRENTROOT:g" -e "s:HOME:$HOME:g" \
   < "$CONFIG/qBittorrent.conf" \

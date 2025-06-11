@@ -8,6 +8,11 @@ SCRIPTS="$ROOT/scripts"
 CONFIG="$ROOT/config"
 PKGS="$ROOT/pkgs"
 
+if [[ ! -v 1 ]]; then
+  cat "$ROOT/README.md"
+  exit 1
+fi
+
 case ${1} in
   nvme)
     python "$SCRIPTS/nvme.py"
@@ -39,14 +44,12 @@ case ${1} in
     sudo usermod -a -G video "$USER"
     source "$SCRIPTS/user.sh"
     source "$SCRIPTS/aur.sh"
+    zsh
     ;;
   graphical)
     [[ -n "$USER" ]]
     source "$SCRIPTS/graphical.sh"
     cat "$ROOT/TODO.md"
-    ;;
-  *)
-    cat "$ROOT/README.md"
     ;;
 esac
 

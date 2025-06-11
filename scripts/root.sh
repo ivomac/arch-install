@@ -18,8 +18,10 @@ console-mode keep
 
 echo "Setting up mkinitcpio"
 
+user_input=none
 while [ "$user_input" != "amd" ] && [ "$user_input" != "intel" ]; do
-  read -r -p "Enter GPU type (amd, intel): " user_input
+  echo "Enter GPU type (amd, intel):" 
+  read -r user_input
 done
 
 case $user_input in
