@@ -50,6 +50,8 @@ jq
 julia
 jupyter-notebook
 jupyterlab
+kvantum
+kvantum-qt5
 lazygit
 libisoburn
 libqalculate
