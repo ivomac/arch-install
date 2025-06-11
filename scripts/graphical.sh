@@ -12,8 +12,8 @@ echo "Setting up base dark theme"
 
 ## PIPX INSTALL
 
+pipx install --python python3.12 aider-chat
 pipx install ty
-pipx install aider-chat
 
 ## FIREFOX SETUP
 
