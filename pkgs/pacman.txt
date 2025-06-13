@@ -98,6 +98,8 @@ python-openai
 python-openai-whisper
 python-pandas
 python-pandas-datareader
+python-parsedatetime
+python-pint
 python-pip
 python-pipx
 python-pyarrow

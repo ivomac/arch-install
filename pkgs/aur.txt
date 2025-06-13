@@ -1,6 +1,5 @@
 otf-openmoji
 advcpmv
-albert
 codelldb-bin
 ddcci-driver-linux-dkms-git
 lavalauncher-git
@@ -10,8 +9,10 @@ python312
 python-dataclasses-json
 python-anthropic
 python-pynput
+python-simpleeval
 qimgv-git
 selectdefaultapplication-git
+ulauncher
 vim-language-server
 wvkbd
 yazi

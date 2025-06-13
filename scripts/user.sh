@@ -124,6 +124,14 @@ echo "Setting up syncthing config"
 mkdir -p "$HOME/.local/state/syncthing"
 cat "$CONFIG/syncthing.xml" >| "$HOME/.local/state/syncthing/config.xml"
 
+## MPD CONFIG
+
+echo "Setting up mpd folders"
+mkdir -p "$HOME/.cache/mpd"
+mkdir -p "$HOME/.config/mpd/playlists"
+
+mkdir -p "$HOME/Media"
+
 ## USER SERVICES
 
 echo "Setting up user services"
@@ -137,19 +145,18 @@ systemctl --user enable pipewire.socket
 systemctl --user enable pipewire-pulse.socket
 systemctl --user enable mpd.socket
 
+systemctl --user enable ulauncher-wayland.service
 systemctl --user enable gammastep-indicator.service
 systemctl --user enable lavalauncher.service
 systemctl --user enable mpd-mpris.service
 systemctl --user enable mpris-proxy.service
 systemctl --user enable profile-cleaner.service
-
 systemctl --user enable qbittorrent.service
 systemctl --user enable ssh-agent.service
 systemctl --user enable swaync.service
 systemctl --user enable swayosd.service
 systemctl --user enable swww-daemon.service
 systemctl --user enable syncthing.service
-
 systemctl --user enable waybar.service
 systemctl --user enable wireplumber.service
 systemctl --user enable wvkbd.service
