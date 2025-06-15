@@ -1,22 +1,7 @@
 
 # SU SETUP
 
-## BOOT
-
-ori_file=(/boot/loader/entries/*_linux.conf)
-ori_content=$(sed -e 's/title.*/title   Arch Linux/' <"${ori_file[1]}")
-
-echo "$ori_content fbcon=font:TER16x32 video=1920x1080@60 sysrq_always_enabled=1 acpi_enforce_resources=lax nowatchdog nmi_watchdog=0 modprobe.blacklist=iTCO_wdt,sp5100_tco sysctl.vm.swappiness=35 splash quiet loglevel=3 udev.log_level=3 rd.udev.log_level=3 systemd.show_status=auto
-" >|"/boot/loader/entries/arch.conf"
-
-echo "default arch.conf
-timeout 0
-console-mode keep
-" >|"/boot/loader/loader.conf"
-
-## MKINITCPIO
-
-echo "Setting up mkinitcpio"
+## Get driver version
 
 user_input=none
 while [ "$user_input" != "amd" ] && [ "$user_input" != "intel" ]; do
@@ -27,11 +12,37 @@ done
 case $user_input in
 amd)
   VIDEO_DRIVER="amdgpu"
+  VIDEO_BOOT_OPTS="amdgpu.dpm=1 amd_iommu=on iommu=pt"
   ;;
 intel)
   VIDEO_DRIVER="i915"
+  VIDEO_BOOT_OPTS="intel_iommu=on iommu=pt i915.enable_dpcd_backlight=1"
   ;;
 esac
+
+
+## BOOT
+
+ori_file=(/boot/loader/entries/*_linux.conf)
+ori_content=$(sed -e 's/title.*/title   Arch Linux/' <"${ori_file[1]}")
+
+echo "$ori_content fbcon=font:TER16x32 video=1920x1080@60 sysrq_always_enabled=1 acpi_enforce_resources=lax nowatchdog nmi_watchdog=0 modprobe.blacklist=iTCO_wdt,sp5100_tco sysctl.vm.swappiness=35 splash quiet loglevel=3 udev.log_level=3 rd.udev.log_level=3 systemd.show_status=auto rootflags=noatime $VIDEO_BOOT_OPTS
+" >|"/boot/loader/entries/arch.conf"
+
+echo "default arch.conf
+timeout 0
+console-mode keep
+" >|"/boot/loader/loader.conf"
+
+
+## MODPROBE
+
+echo "options snd_hda_intel power_save=0
+" >|"/etc/modprobe.d/40-audio.conf"
+
+## MKINITCPIO
+
+echo "Setting up mkinitcpio"
 
 echo "MODULES=($VIDEO_DRIVER)
 BINARIES=()

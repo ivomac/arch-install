@@ -90,6 +90,7 @@ perl-file-homedir
 perl-yaml-tiny
 postgresql
 power-profiles-daemon
+pre-commit
 profile-cleaner
 pyright
 python-debugpy
@@ -159,7 +160,7 @@ vscode-json-languageserver
 waybar
 wireless_tools
 wl-clipboard
-xdg-desktop-portal-wlr
+xdg-desktop-portal-gnome
 xdg-user-dirs
 xwayland-satellite
 yaml-language-server
