@@ -165,6 +165,9 @@ xdg-user-dirs
 xwayland-satellite
 yaml-language-server
 yt-dlp
+zathura
+zathura-djvu
+zathura-pdf-poppler
 zip
 zram-generator
 zsh
