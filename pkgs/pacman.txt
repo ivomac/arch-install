@@ -39,10 +39,6 @@ git
 gitleaks
 gnome-themes-extra
 gopls
-gtklock
-gtklock-playerctl-module
-gtklock-powerbar-module
-gtklock-userinfo-module
 hugin
 inetutils
 inkscape
@@ -130,6 +126,7 @@ sshfs
 starship
 stow
 stylua
+swaylock
 swaync
 swayosd
 swww

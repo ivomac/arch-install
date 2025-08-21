@@ -2,7 +2,6 @@ otf-openmoji
 advcpmv
 codelldb-bin
 ddcci-driver-linux-dkms-git
-lavalauncher-git
 lazydocker-bin
 local-lua-debugger-vscode-git
 python312
