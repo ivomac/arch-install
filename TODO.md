@@ -24,8 +24,8 @@
         - amazon:
             https://www.amazon.de/s?k=%s
 
-        - libgen.is:
-            https://libgen.is/search.php?req=%s&open=0&res=100&view=detailed&phrase=0&column=def
+        - pirate-archives:
+            https://annas-archive.org/search?q=%s&sort=newest&lang=en
 
         - 1337x.to:
             https://1337x.to/sort-search/%s/seeders/desc/1/
