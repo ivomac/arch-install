@@ -124,6 +124,14 @@ AllowHybridSleep=no
 AllowSuspendThenHibernate=no
 " >|/etc/systemd/sleep.conf.d/40-disable-suspend.conf
 
+## UDEV
+
+echo "Setting up udev rules"
+
+echo '
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="video", TAG+="uaccess", TAG+="udev-acl"
+' >| /etc/udev/rules.d/99-vial.rules
+
 ## FSTAB
 
 sed -i 's/  rw,relatime / rw,noatime,commit=60  /' /etc/fstab
