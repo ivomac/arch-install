@@ -12,7 +12,7 @@ done
 case $user_input in
 amd)
   VIDEO_DRIVER="amdgpu"
-  VIDEO_BOOT_OPTS=""
+  VIDEO_BOOT_OPTS="amdgpu.runpm=0 amdgpu.audio=0"
   ;;
 intel)
   VIDEO_DRIVER="i915"
@@ -38,6 +38,7 @@ console-mode keep
 ## MODPROBE
 
 echo "options snd_hda_intel power_save=0
+options amdgpu audio=0
 " >|"/etc/modprobe.d/40-audio.conf"
 
 ## MKINITCPIO
