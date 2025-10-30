@@ -12,11 +12,11 @@ done
 case $user_input in
 amd)
   VIDEO_DRIVER="amdgpu"
-  VIDEO_BOOT_OPTS="amdgpu.dpm=1 amd_iommu=on iommu=pt"
+  VIDEO_BOOT_OPTS=""
   ;;
 intel)
   VIDEO_DRIVER="i915"
-  VIDEO_BOOT_OPTS="intel_iommu=on iommu=pt i915.enable_dpcd_backlight=1"
+  VIDEO_BOOT_OPTS="i915.enable_dpcd_backlight=1"
   ;;
 esac
 
@@ -26,7 +26,7 @@ esac
 ori_file=(/boot/loader/entries/*_linux.conf)
 ori_content=$(sed -e 's/title.*/title   Arch Linux/' <"${ori_file[1]}")
 
-echo "$ori_content fbcon=font:TER16x32 video=1920x1080@60 sysrq_always_enabled=1 acpi_enforce_resources=lax nowatchdog nmi_watchdog=0 modprobe.blacklist=iTCO_wdt,sp5100_tco sysctl.vm.swappiness=35 splash quiet loglevel=3 udev.log_level=3 rd.udev.log_level=3 systemd.show_status=auto rootflags=noatime $VIDEO_BOOT_OPTS
+echo "$ori_content fbcon=font:TER16x32 video=1920x1080@60 sysrq_always_enabled=1 acpi_enforce_resources=lax nowatchdog nmi_watchdog=0 modprobe.blacklist=iTCO_wdt,sp5100_tco sysctl.vm.swappiness=35 splash quiet loglevel=3 udev.log_level=3 rd.udev.log_level=3 systemd.show_status=auto rootflags=noatime pcie_aspm=off $VIDEO_BOOT_OPTS
 " >|"/boot/loader/entries/arch.conf"
 
 echo "default arch.conf
