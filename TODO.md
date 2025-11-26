@@ -25,7 +25,7 @@
             https://www.amazon.de/s?k=%s
 
         - pirate-archives:
-            https://annas-archive.org/search?q=%s&sort=newest&lang=en
+            https://annas-archive.org/search?q=%s&sort=&lang=en
 
         - 1337x.to:
             https://1337x.to/sort-search/%s/seeders/desc/1/
