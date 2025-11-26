@@ -129,6 +129,12 @@ AllowSuspendThenHibernate=no
 
 sed -i 's/  rw,relatime / rw,noatime,commit=60  /' /etc/fstab
 
+## KEYBOARD VIAL
+
+echo '
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="video", TAG+="uaccess", TAG+="udev-acl"
+' >|/etc/udev/rules.d/99-vial.rules
+
 ## SYSTEM
 
 echo "Setting up system services"
