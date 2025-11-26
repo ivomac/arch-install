@@ -61,7 +61,7 @@ chmod 644 ~/.ssh/authorized_keys  ~/.ssh/*.pub
 
 echo "Deleting config folders"
 
-rm -f $HOME/.bash*
+rm -f "$HOME"/.bash*
 
 for dir in "$HOME/GPG" "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$DOTDIR" "$BIN"; do
   sudo rm -rf "$dir"
@@ -144,6 +144,7 @@ systemctl --user enable foot-server.socket
 systemctl --user enable pipewire.socket
 systemctl --user enable pipewire-pulse.socket
 systemctl --user enable mpd.socket
+systemctl --user enable ssh-agent.socket
 
 systemctl --user enable ulauncher-wayland.service
 systemctl --user enable gammastep-indicator.service
@@ -152,7 +153,7 @@ systemctl --user enable mpd-mpris.service
 systemctl --user enable mpris-proxy.service
 systemctl --user enable profile-cleaner.service
 systemctl --user enable qbittorrent.service
-systemctl --user enable ssh-agent.service
+systemctl --user enable ssh-add.service
 systemctl --user enable swaync.service
 systemctl --user enable swayosd.service
 systemctl --user enable swww-daemon.service
