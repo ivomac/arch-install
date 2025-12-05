@@ -33,6 +33,7 @@ foot-terminfo
 fzf
 gammastep
 gcc-fortran
+gcr
 gdb
 gist
 git
