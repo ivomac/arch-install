@@ -5,5 +5,6 @@ sed -i \
   -e 's/.*ParallelDownloads.*/ParallelDownloads = 10/' \
   -e '/^#\[multilib\]/,/^#Include/ s/^#//' \
   /etc/pacman.conf
+
 echo "Installing packages"
-pacman -Syu --noconfirm --needed - < "$PKGS/pacman.txt"
+pacman -Syu --noconfirm --needed --asexplicit - < "$PKGS/pacman.txt"

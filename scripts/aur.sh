@@ -9,7 +9,7 @@ rustup default nightly
 zsh "$HOME/.local/bin/aur-helper-install -f paru"
 
 echo "Installing AUR packages"
-paru -S --noconfirm --needed - < "$PKGS/aur.txt"
+paru -S --noconfirm --needed --asexplicit - < "$PKGS/aur.txt"
 
 echo "Installing Yazi plugins"
 ya pkg upgrade
