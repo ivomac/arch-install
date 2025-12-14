@@ -6,8 +6,7 @@ rm -rf "$HOME/Firosevka"
 echo "Setting up rust"
 rustup default nightly
 
-echo "Installing paru"
-zsh "$HOME/.local/bin/paru-install"
+zsh "$HOME/.local/bin/aur-helper-install -f paru"
 
 echo "Installing AUR packages"
 paru -S --noconfirm --needed - < "$PKGS/aur.txt"
