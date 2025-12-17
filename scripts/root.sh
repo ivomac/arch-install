@@ -135,6 +135,20 @@ echo '
 KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="video", TAG+="uaccess", TAG+="udev-acl"
 ' >|/etc/udev/rules.d/99-vial.rules
 
+## STEAM
+
+echo '[Desktop Entry]
+Name=Steam
+Comment=Application for managing and playing games on Steam
+Exec=/usr/bin/steam %U
+Terminal=false
+Type=Application
+Hidden=true
+NoDisplay=true
+' >|/usr/share/applications/steam.desktop
+ 
+chattr +i /usr/share/applications/steam.desktop
+
 ## SYSTEM
 
 echo "Setting up system services"
