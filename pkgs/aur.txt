@@ -15,7 +15,7 @@ python311
 python312
 python38
 python39
-qimgv-git
+qimgv
 selectdefaultapplication-git
 subliminal
 ttf-firosevka
