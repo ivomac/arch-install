@@ -10,14 +10,9 @@ opencode-bin
 otf-openmoji
 paru
 paru-debug
-python310
-python311
 python312
-python38
-python39
 qimgv-git
 selectdefaultapplication-git
 subliminal
 ttf-firosevka
-wvkbd
 yek

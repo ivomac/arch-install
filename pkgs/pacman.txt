@@ -4,7 +4,6 @@ amd-ucode
 amdgpu_top
 android-file-transfer
 android-tools
-archinstall
 atool
 aws-cli
 base
@@ -39,6 +38,7 @@ foot-terminfo
 fzf
 gammastep
 gcc-fortran
+gcr
 gdb
 gist
 git
@@ -47,10 +47,12 @@ gnome-themes-extra
 gopls
 greetd
 greetd-tuigreet
+grim
 hugin
 img2pdf
 inetutils
 inkscape
+intel-media-driver
 intel-ucode
 jq
 julia
@@ -64,6 +66,7 @@ lib32-vulkan-radeon
 libisoburn
 libpulse
 libreoffice-fresh
+libva-intel-driver
 llvm
 lshw
 lua-language-server
@@ -199,6 +202,7 @@ xdg-utils
 xf86-video-amdgpu
 xf86-video-ati
 xorg-xwininfo
+xournalpp
 xwayland-satellite
 yaml-language-server
 yazi
