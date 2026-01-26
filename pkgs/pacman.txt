@@ -155,10 +155,18 @@ terminus-font
 tex-gyre-fonts
 texlab
 texlive-basic
+texlive-bibtexextra
+texlive-binextra
+texlive-fontsextra
 texlive-fontsrecommended
 texlive-latex
+texlive-latexextra
+texlive-latexrecommended
 texlive-luatex
 texlive-mathscience
+texlive-pictures
+texlive-plaingeneric
+texlive-publishers
 thunar
 thunar-archive-plugin
 thunar-media-tags-plugin
@@ -184,7 +192,6 @@ vulkan-radeon
 waybar
 wayland-protocols
 wget
-wireless_tools
 wireplumber
 wl-clipboard
 xarchiver

@@ -13,9 +13,10 @@ paru-debug
 python310
 python311
 python312
+python313
 python38
 python39
-qimgv
+qimgv-git
 selectdefaultapplication-git
 subliminal
 ttf-firosevka
