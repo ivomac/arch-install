@@ -12,7 +12,7 @@ done
 case $user_input in
 amd)
   VIDEO_DRIVER="amdgpu"
-  VIDEO_BOOT_OPTS="amdgpu.audio=0"
+  VIDEO_BOOT_OPTS=""
   ;;
 intel)
   VIDEO_DRIVER="i915"
