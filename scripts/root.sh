@@ -12,7 +12,7 @@ done
 case $user_input in
 amd)
   VIDEO_DRIVER="amdgpu"
-  VIDEO_BOOT_OPTS="amdgpu.audio=0"
+  VIDEO_BOOT_OPTS=""
   ;;
 intel)
   VIDEO_DRIVER="i915"
@@ -37,9 +37,7 @@ console-mode keep
 
 ## MODPROBE
 
-echo "options snd_hda_intel power_save=0
-options amdgpu audio=0
-" >|"/etc/modprobe.d/40-audio.conf"
+echo "options snd_hda_intel position_fix=2 snoop=1" >|"/etc/modprobe.d/40-audio.conf"
 
 ## MKINITCPIO
 
@@ -163,6 +161,7 @@ systemctl enable bluetooth.service
 systemctl enable earlyoom.service
 systemctl enable greetd.service
 systemctl enable power-profiles-daemon.service
+systemctl enable rtkit-daemon.services
 systemctl enable sshd.service
 systemctl enable tailscaled.service
 systemctl enable udisks2.service
