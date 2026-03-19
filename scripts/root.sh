@@ -1,11 +1,10 @@
-
 # SU SETUP
 
 ## Get driver version
 
 user_input=none
 while [ "$user_input" != "amd" ] && [ "$user_input" != "intel" ]; do
-  echo "Enter GPU type (amd, intel):" 
+  echo "Enter GPU type (amd, intel):"
   read -r user_input
 done
 
@@ -13,13 +12,15 @@ case $user_input in
 amd)
   VIDEO_DRIVER="amdgpu"
   VIDEO_BOOT_OPTS=""
+
+  systemctl enable amdfan.service
+
   ;;
 intel)
   VIDEO_DRIVER="i915"
   VIDEO_BOOT_OPTS="i915.enable_dpcd_backlight=1"
   ;;
 esac
-
 
 ## BOOT
 
@@ -33,7 +34,6 @@ echo "default arch.conf
 timeout 0
 console-mode keep
 " >|"/boot/loader/loader.conf"
-
 
 ## MODPROBE
 
@@ -72,6 +72,22 @@ echo "kernel.sysrq=256" >|/etc/sysctl.d/40-sysrq.conf
 echo "Quieting kernel"
 
 echo "kernel.printk=3 3 3 3" >|/etc/sysctl.d/40-quiet.conf
+
+## FAN CONTROL
+
+echo "speed_matrix:
+- [4, 20]
+- [60, 20]
+- [70, 35]
+- [80, 50]
+- [90, 90]
+
+threshold: 4
+frequency: 5
+
+cards:
+- card1
+" >|"/etc/amdfan.yml"
 
 ## CHANGE SHUTDOWN TIMEOUT
 
@@ -144,7 +160,7 @@ Type=Application
 Hidden=true
 NoDisplay=true
 ' >|/usr/share/applications/steam.desktop
- 
+
 chattr +i /usr/share/applications/steam.desktop
 
 ## SYSTEM

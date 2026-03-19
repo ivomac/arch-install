@@ -1,4 +1,5 @@
 advcpmv
+amdfan
 anyrun-git
 codelldb-bin
 ddcci-driver-linux-dkms-git

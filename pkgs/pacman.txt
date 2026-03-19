@@ -79,6 +79,7 @@ man-db
 man-pages
 marksman
 mesa
+mesa-utils
 mpc
 mpd
 mpd-mpris
@@ -107,6 +108,7 @@ pipewire
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
+pngquant
 postgresql
 power-profiles-daemon
 pre-commit
@@ -130,6 +132,7 @@ qt6-wayland
 qt6-webview
 qt6ct
 rclone
+realtime-privileges
 reflector
 ripgrep
 ruff
