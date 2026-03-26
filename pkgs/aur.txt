@@ -3,6 +3,7 @@ amdfan
 anyrun-git
 codelldb-bin
 ddcci-driver-linux-dkms-git
+jbig2enc
 lazydocker-bin
 local-lua-debugger-vscode-git
 niri-float-sticky
