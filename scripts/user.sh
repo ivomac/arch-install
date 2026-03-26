@@ -146,7 +146,7 @@ systemctl --user enable pipewire-pulse.socket
 systemctl --user enable mpd.socket
 systemctl --user enable ssh-agent.socket
 
-systemctl --user enable ulauncher-wayland.service
+systemctl --user enable awww-daemon.service
 systemctl --user enable gammastep-indicator.service
 systemctl --user enable lavalauncher.service
 systemctl --user enable mpd-mpris.service
@@ -156,8 +156,8 @@ systemctl --user enable qbittorrent.service
 systemctl --user enable ssh-add.service
 systemctl --user enable swaync.service
 systemctl --user enable swayosd.service
-systemctl --user enable swww-daemon.service
 systemctl --user enable syncthing.service
+systemctl --user enable ulauncher-wayland.service
 systemctl --user enable waybar.service
 systemctl --user enable wireplumber.service
 systemctl --user enable wvkbd.service
