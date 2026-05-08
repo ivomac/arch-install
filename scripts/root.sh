@@ -18,7 +18,7 @@ amd)
   ;;
 intel)
   VIDEO_DRIVER="i915"
-  VIDEO_BOOT_OPTS="i915.enable_dpcd_backlight=1"
+  VIDEO_BOOT_OPTS="i915.enable_dpcd_backlight=1 acpi_backlight=native"
   ;;
 esac
 
