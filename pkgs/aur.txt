@@ -4,18 +4,16 @@ anyrun-git
 codelldb-bin
 ddcci-driver-linux-dkms-git
 jbig2enc
-lazydocker-bin
 local-lua-debugger-vscode-git
 niri-float-sticky
 niri-switch
+ocrmypdf
 opencode-bin
 otf-openmoji
-paru
-paru-debug
+python-fpdf2
 python310
 python311
 python312
-python313
 python38
 python39
 qimgv-git
@@ -23,4 +21,6 @@ selectdefaultapplication-git
 subliminal
 ttf-firosevka
 wvkbd
+yay
+yay-debug
 yek
