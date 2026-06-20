@@ -163,6 +163,12 @@ NoDisplay=true
 
 chattr +i /usr/share/applications/steam.desktop
 
+## POSTGRES
+
+if [[ ! -s /var/lib/postgres/data/PG_VERSION ]]; then
+  su - postgres -c "initdb -D /var/lib/postgres/data"
+fi
+
 ## SYSTEM
 
 echo "Setting up system services"
@@ -175,6 +181,7 @@ systemctl enable docker.socket
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 systemctl enable greetd.service
+systemctl enable postgresql.service
 systemctl enable power-profiles-daemon.service
 systemctl enable rtkit-daemon.services
 systemctl enable sshd.service
