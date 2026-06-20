@@ -39,6 +39,7 @@ flatbuffers
 foot
 foot-terminfo
 fzf
+gamemode
 gammastep
 gcc-fortran
 gcr
@@ -96,6 +97,7 @@ ntfs-3g
 nvme-cli
 nwg-look
 obs-studio
+opencode
 openconnect
 otf-libertinus
 papirus-icon-theme

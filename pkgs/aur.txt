@@ -1,6 +1,7 @@
 advcpmv
 amdfan
 anyrun-git
+beyondallreason-appimage
 codelldb-bin
 ddcci-driver-linux-dkms-git
 jbig2enc
@@ -8,11 +9,11 @@ local-lua-debugger-vscode-git
 niri-float-sticky
 niri-switch
 ocrmypdf
-opencode-bin
 otf-openmoji
 python310
 python311
 python312
+python313
 python38
 python39
 qimgv-git
