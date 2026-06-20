@@ -57,9 +57,9 @@ mkinitcpio -P
 echo "Setting up sudoers"
 
 echo "
-Defaults targetpw
+Defaults rootpw
 ALL ALL=(ALL:ALL) ALL
-" >|/etc/sudoers.d/40-targetpw
+" >|/etc/sudoers.d/40-rootpw
 
 ## ACTIVATE SysRq
 
@@ -174,7 +174,6 @@ systemctl enable docker.socket
 
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
-systemctl enable earlyoom.service
 systemctl enable greetd.service
 systemctl enable power-profiles-daemon.service
 systemctl enable rtkit-daemon.services
