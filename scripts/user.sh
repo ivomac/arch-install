@@ -13,7 +13,7 @@ export BIN="$HOME/.local/bin"
 export RESTOW="$HOME/.local/bin/restow"
 
 export SSH_ASKPASS="$HOME/ssh_askpass.sh"
-export SSH_ASKPASS_REQUIRE="force" 
+export SSH_ASKPASS_REQUIRE="force"
 
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
@@ -41,7 +41,7 @@ else
   exit 1
 fi
 
-echo "one-time ssh-key unlock:" 
+echo "one-time ssh-key unlock:"
 read -r -s SSH_PASS
 export SSH_PASS
 
