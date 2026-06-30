@@ -39,8 +39,6 @@ flatbuffers
 foot
 foot-terminfo
 fzf
-gamemode
-gammastep
 gcc-fortran
 gcr
 gdb
@@ -51,7 +49,6 @@ gnome-themes-extra
 gopls
 greetd
 greetd-tuigreet
-htop
 hugin
 imagemagick
 img2pdf
@@ -180,6 +177,7 @@ thunar-media-tags-plugin
 thunar-shares-plugin
 thunar-volman
 tinymist
+tmux
 tree-sitter-cli
 ttf-inconsolata
 ttf-nerd-fonts-symbols-mono
@@ -200,6 +198,7 @@ wayland-protocols
 wget
 wireplumber
 wl-clipboard
+wlsunset
 xarchiver
 xdg-desktop-portal-gnome
 xdg-desktop-portal-wlr

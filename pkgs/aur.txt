@@ -7,7 +7,7 @@ ddcci-driver-linux-dkms-git
 jbig2enc
 local-lua-debugger-vscode-git
 niri-float-sticky
-niri-switch
+noctalia-git
 ocrmypdf
 otf-openmoji
 python310
