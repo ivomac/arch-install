@@ -1,5 +1,7 @@
 advcpmv
 ddcci-driver-linux-dkms-git
+google-cloud-cli
+google-cloud-cli-gsutil
 local-lua-debugger-vscode-git
 niri-float-sticky
 noctalia-git
@@ -11,7 +13,7 @@ python312
 python313
 python38
 python39
-qimgv-git
+qimgv
 selectdefaultapplication-git
 subliminal
 ttf-firosevka
